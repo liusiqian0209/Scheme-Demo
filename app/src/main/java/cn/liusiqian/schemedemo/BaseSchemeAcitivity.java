@@ -8,7 +8,9 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Créé par liusiqian 16/11/19.
@@ -25,7 +27,10 @@ public abstract class BaseSchemeAcitivity extends AppCompatActivity
         setContentView(setLayoutRes());
         initData(getIntent());
         initWidgets(savedInstanceState);
+        loadData();
     }
+
+    protected abstract void loadData();
 
     protected abstract void initWidgets(Bundle savedInstanceState);
 
@@ -35,7 +40,12 @@ public abstract class BaseSchemeAcitivity extends AppCompatActivity
             return;
         }
         Uri uri = intent.getData();
-        Log.i(getClass().getSimpleName(),"getquery = "+uri.getQuery());
+        Set<String> set = uri.getQueryParameterNames();
+        mParams = new HashMap<>();
+        for(String s:set)
+        {
+            mParams.put(s,uri.getQueryParameter(s));
+        }
     }
 
     protected abstract @LayoutRes int setLayoutRes();

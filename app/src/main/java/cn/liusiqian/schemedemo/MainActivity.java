@@ -10,10 +10,18 @@ public class MainActivity extends BaseSchemeAcitivity
     private TextView tv;
 
     @Override
+    protected void loadData()
+    {
+
+    }
+
+    @Override
     protected void initWidgets(Bundle savedInstanceState)
     {
         tv = (TextView) findViewById(R.id.txt);
         webview = (WebView) findViewById(R.id.web);
+        tv.setText("schdemo://target/base?id=2&name=test");
+        webview.loadUrl("file:///android_asset/index.html");
     }
 
     @Override
